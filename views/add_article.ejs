@@ -1,0 +1,81 @@
+<%- include('header'); -%>
+
+<script src="https://cdn.tiny.cloud/1/66xhjkwmks67pcwcn5jmwhvpndj63bhn9mqlhq3ubfxxwkid/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+  <script>
+  tinymce.init({
+    selector: 'textarea#editor',
+    skin: 'bootstrap',
+    plugins: 'lists, link, image, media',
+    toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat ',
+    menubar: false
+  });
+  </script>
+
+  <div id="add" class="home-section bgimg">
+        <div class="container">
+          <div class="row">
+            <div class=" col-md-16">
+              <div class="section-heading">
+                <h2>Create BLOG</h2>
+                <div class="heading-line"></div>
+                <p>Welcome to the blog addition section of <span class="w3-tag">Imagine Huge</span></p>
+              </div>
+            </div>
+          </div>
+    
+          <div class="row">
+            <div class=" col-md-16">
+
+    <form method="POST" action="/articles/add">
+      <div class=" col-md-16">
+        <div class="form-group">
+        <input type="text" name="title" class="form-control" placeholder="Title" />
+   </div></div>
+      
+      <div class="col-md-16">
+        <div class="form-group">
+        <input type="text" name="author" class="form-control" placeholder="Author" />
+   </div></div>
+
+   <div class=" col-md-16">
+    <div class="form-group">
+
+        <select name="category" class="form-control" >
+
+            <option value="">Select a Category</option>
+
+            <!--dynamically select categories from mongo to render in dropdown-->
+            <% for (var i = 0; i < cats.length; i++){ %>
+            <option value="<%= cats[i] %>"><%= cats[i] %></option>
+            <%}%>
+
+        </select>
+  </div>
+</div>
+
+      <div class=" col-md-16">
+        <div class="form-group">
+        <input type="text" name="cat" class="form-control" placeholder="If your category not available in the list, mention it here." />
+   </div></div>
+
+      <div class="col-md-16">
+        <div class="form-group">
+        <textarea id="editor" class="form-control" name="body" rows="20" placeholder="Body"></textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class=" col-md-16">
+      <input class="btn btn-theme btn-lg btn-block" type="submit" value="Submit"/>
+    </div>
+  </div>
+          
+    </form>
+  </div>
+</div>
+
+</div>
+</div>
+<%- include('footer'); -%>
+

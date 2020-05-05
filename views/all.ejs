@@ -1,0 +1,56 @@
+<%- include('header'); -%>
+<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/lay.css">
+
+  <div class="home-section bg-gray"> 
+    <div class="container">
+      <div class="row">
+          <div class="section-heading">
+            <h2>Blog Page</h2>
+            <div class="heading-line"></div>
+            <p>Various blog are listed here. </p>
+          </div></div>
+      
+            <div class="row">
+              <span id="items">
+                   </span>
+                  <% var i = 2 %>
+                <p><b>Category: <%= data[i]._id %> </b></p>
+                <div class="row">
+
+                    <%for (var j=0;j<data[i].entry.length;j++) {%>
+                      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
+
+
+                        <% if (data[i].entry[j].category == data[i]._id) { %>
+
+                      <img src="/uploads/n2.jpg" alt="Image" style="width:100%">
+                      <% if (data[i].entry[j].title.length >= 19) { %>
+                        <h6><%= data[i].entry[j].title.slice(0,18) %>...</h6>
+                     <% } else { %>
+                         <h6><%= data[i].entry[j].title %></h6>
+                     <% } %>
+                          <p>Written by: <%= data[i].entry[j].author %></p>
+                          <a href = "/articles/<%= data[i].entry[j].unique_id %>" class="stretched-link">Continue reading</a><br><br><br>
+               
+                        <% } %></div>
+
+                        <% } %></div>  
+
+           </div>   
+  </div>  </div>
+  
+<%- include('footer'); -%>
+
+<script>
+  if (localStorage.getItem('cart') == null) {
+      var cart = {};
+  } else {
+      cart = JSON.parse(localStorage.getItem('cart'));
+  }
+  console.log(cart);
+  mystr = `<span>${cart}</span>`      
+  $('#items').append(mystr);
+  document.getElementById('items').innerHTML;
+
+  
+</script>
