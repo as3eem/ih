@@ -4,29 +4,26 @@ const router = express.Router();
 // Article Model
 let Article = require('../models/article');
 // single category view
-router.get('/all/:page', function(req, res, next) {
-    Article.aggregate()
-        .group({
-            "_id": "$category",
-            "entry": {
-                "$push": {
-                    "title": "$title",
-                    "author": "$author",
-                    "category": "$category",
-                    "body": "$body",
-                    "unique_id": "$_id"
-                }
-            }
-        })
-        .exec(function (err, result){
-            if (err) return next(err)
-            var xyz = JSON.stringify(result, null, 2);
-            console.log('-------------->', result[0].entry[0].title);
-            res.render('all',{
-                data: result
-            })
-        });
+router.get('/all', function(req, res, next) {
+    console.log(req.query.cat);
+    var required_category = req.query.cat;
+    // use this to populate the similar results
+    Article.find({category: required_category},function(err,result){
+        if (err)  throw err;
+
+        // your single category blog result
+        var x = JSON.stringify(result, null, 2);
+        console.log(result);
+
+        // enter the page which you want to render and double if there is ant requirement to JSON stringyfy thr result
+        // res.render('your_all_blog_view_page', {data: result});
+        res.render('all', {
+            result: result
+        });    });
+
+
 });
+
 // all category view
 router.get('/cat', function(req, res, next) {
   Article.aggregate()
