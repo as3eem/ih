@@ -26,11 +26,6 @@ router.get('/all', function(req, res, next) {
             result: result
         });    });
 
-        res.send(result);
-    });
-
-
-
 });
 
 // all category view
