@@ -14,12 +14,21 @@ router.get('/all', function(req, res, next) {
         if (err)  throw err;
 
         // your single category blog result
+
+        var x = JSON.stringify(result, null, 2);
+
         console.log(result);
 
         // enter the page which you want to render and double if there is ant requirement to JSON stringyfy thr result
         // res.render('your_all_blog_view_page', {data: result});
+
+        res.render('all', {
+            result: result
+        });    });
+
         res.send(result);
     });
+
 
 
 });
