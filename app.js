@@ -3,10 +3,10 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const config = require('./config/database');
+require('dotenv').config()
 
-mongoose.connect(config.database);
+mongoose.connect(process.env.MONGODB_URI || config.database);
 let db = mongoose.connection;
-
 //check connection
 db.once('open',function(){
   console.log('Connected to MongoDB');
@@ -62,4 +62,4 @@ app.use('/send', contact);
 //Tell Express where we keep our index.ejs
 //app.set("views", __dirname + "/views"); 
 
-app.listen(8080, () => console.log('Server started...'));
+app.listen(process.env.PORT || 8080, () => console.log('Server started...'));
