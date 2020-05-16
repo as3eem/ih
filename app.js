@@ -5,17 +5,31 @@ const mongoose = require('mongoose');
 const config = require('./config/database');
 require('dotenv').config()
 
-mongoose.connect(process.env.MONGODB_URI || config.database);
-let db = mongoose.connection;
-//check connection
-db.once('open',function(){
-  console.log('Connected to MongoDB');
+// mongoose.connect(process.env.MONGODB_URI || config.database);
+// let db = mongoose.connection;
+// //check connection
+// db.once('open',function(){
+//   console.log('Connected to MongoDB');
+// });
+
+// //check for db errors
+// db.on('error', function(err){
+//   console.log(err);
+// });
+
+// var MongoClient = require('mongodb').MongoClient;
+
+var uri = "mongodb://as3eem:qwertyatlas@imaginehuge-db-shard-00-00-mb6x7.gcp.mongodb.net:27017,imaginehuge-db-shard-00-01-mb6x7.gcp.mongodb.net:27017,imaginehuge-db-shard-00-02-mb6x7.gcp.mongodb.net:27017/test?ssl=true&replicaSet=imaginehuge-db-shard-0&authSource=admin&retryWrites=true&w=majority";
+mongoose.connect(uri, function(err, client) {
+  // const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  console.log('Connecting...');
+  if(err){
+    console.log('Mongo Error');
+  }
+  console.log('Mongo Connected Succesfully');
 });
 
-//check for db errors
-db.on('error', function(err){
-  console.log(err);
-});
 
 const app = express();
 
