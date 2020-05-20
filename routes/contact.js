@@ -27,8 +27,8 @@ router.post('/', (req, res) => {
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-        user: 'yourmailnames@gmail.com', // generated ethereal user
-        pass: 'your-password'  // generated ethereal password
+        user: 'imaginehugepvtltd@gmail.com', // generated ethereal user
+        pass: ''  // generated ethereal password
     },
     tls:{
       rejectUnauthorized:false
@@ -38,9 +38,9 @@ router.post('/', (req, res) => {
     // setup email data with unicode symbols
   let mailOptions = {
     from: '"Imagine Huge" <yourmailnames@gmail.com>', // sender address
-    to: 'ritikajais1999@gmail.com', // list of receivers
+    to: 'imaginehugepvtltd@gmail.com', // list of receivers
     subject: 'Contact Details', // Subject line
-    text: 'Hello world?', // plain text body
+    text: 'Hello!!!', // plain text body
     html: output // html body
   };
 
